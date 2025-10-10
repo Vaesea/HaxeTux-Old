@@ -2,6 +2,7 @@ package;
 
 // Tutorials Used:
 // https://www.youtube.com/watch?v=Qdq-vXt-NOE
+// https://www.youtube.com/watch?v=aQazVHDztsg and yes i know this is for godot but it was actually helpful for this
 
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -14,11 +15,13 @@ class Tux extends FlxSprite
 {
     // Speed
     var walkSpeed = 230;
+    var speed = 0; // DON'T CHANGE THIS. You should only change walkSpeed and runSpeed.
     var runSpeed = 320;
 
     // Jump stuff and Gravity
     var jumpHeight = 576;
     var gravity = 800;
+    var decelerateOnJumpRelease = 0.5; // thanks godot tutorial that i used
 
     // Images
     var smallImage = FlxAtlasFrames.fromSparrow("assets/images/characters/tux/smalltux.png", "assets/images/characters/tux/smalltux.xml");
@@ -33,27 +36,35 @@ class Tux extends FlxSprite
         acceleration.y = gravity;
     }
 
-    function movement()
-    {
+	override public function update(elapsed:Float)
+	{
         // these will have to be changed if options are added that would allow the player to change keybinds or whatever it's called
         // Left + A = Go Left, Right + D = Go Right, Control = Run, Down + S = Duck (NOT ADDED YET!!!), Space + Up + W = Jump
-        if (FlxG.keys.anyPressed([LEFT, A]) && !FlxG.keys.anyPressed([CONTROL, RIGHT, D, DOWN, S]))
+        // movement stuff here because of stupid elapsed:float thing that's needed for variable jump height i think
+        if (FlxG.keys.anyPressed([CONTROL]))
         {
-            velocity.x = -walkSpeed;
+            speed = runSpeed;
         }
-        if (FlxG.keys.anyPressed([RIGHT, D]) && !FlxG.keys.anyPressed([CONTROL, LEFT, A, DOWN, S]))
+        else 
         {
-            velocity.x = walkSpeed;
+            speed = walkSpeed;
+        }
+        if (FlxG.keys.anyPressed([LEFT, A]) && !FlxG.keys.anyPressed([RIGHT, D]))
+        {
+            velocity.x = -speed;
+        }
+        if (FlxG.keys.anyPressed([RIGHT, D]) && !FlxG.keys.anyPressed([LEFT, A]))
+        {
+            velocity.x = speed;
         }
         if (FlxG.keys.anyPressed([SPACE, UP, W]) && isTouching(FlxDirectionFlags.FLOOR))
         {
             velocity.y = -jumpHeight;
         }
-    }
-
-	override public function update(elapsed:Float)
-	{
-        movement();
+        if (FlxG.keys.anyJustReleased([SPACE, UP, W]) && velocity.y < 0)
+        {
+            velocity.y = decelerateOnJumpRelease;
+        }
 		super.update(elapsed);
 	}
 }
