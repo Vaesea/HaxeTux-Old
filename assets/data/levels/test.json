@@ -6,6 +6,19 @@
   "offsetY": 0,
   "layers": [
     {
+      "name": "entities",
+      "_eid": "21036646",
+      "offsetX": 0,
+      "offsetY": 0,
+      "gridCellWidth": 32,
+      "gridCellHeight": 32,
+      "gridCellsX": 114,
+      "gridCellsY": 19,
+      "entities": [
+        {"name": "tux", "id": 0, "_eid": "78985953", "x": 64, "y": 448, "originX": 0, "originY": 0}
+      ]
+    },
+    {
       "name": "Foreground",
       "_eid": "78978601",
       "offsetX": 0,
