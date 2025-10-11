@@ -16,12 +16,13 @@ class Tux extends FlxSprite
 {
     // Speed
     var walkSpeed = 230;
-    var speed = 0; // DON'T CHANGE THIS. You should only change walkSpeed and runSpeed.
+    var speed = 0; // DON'T CHANGE THIS UNLESS YOU KNOW WHAT YOU'RE DOING. You should only change walkSpeed and runSpeed.
     var runSpeed = 320;
 
     // Jump stuff and Gravity
-    var jumpHeight = 576; // Jump Height
-    var gravity = 800; // Gravity, I don't recommend changing this but you can if you want low gravity or high gravity.
+    var minJumpHeight = 512; // Jump Height (Minimum)
+    var maxJumpHeight = 544; // Jump Height (Maximum)
+    var gravity = 1000; // Gravity, I don't recommend changing this but you can if you want low gravity or high gravity.
     var decelerateOnJumpRelease = 0.5; // thanks godot tutorial that i used. also dont change this
 
     // Image, if replaced, make sure the replacement image has the same animations!
@@ -37,8 +38,8 @@ class Tux extends FlxSprite
 
         // XML Spritesheet stuff, thanks Friday Night Funkin'
         frames = tuxImage;
-        animation.addByPrefix('stand', 'stand', 6, false);
-        animation.addByPrefix('walk', 'walk', 6, true);
+        animation.addByPrefix('stand', 'stand', 10, false);
+        animation.addByPrefix('walk', 'walk', 10, true);
         animation.play('stand');
     }
 
@@ -85,7 +86,14 @@ class Tux extends FlxSprite
         }
         if (FlxG.keys.anyPressed([SPACE, UP, W]) && isTouching(FlxDirectionFlags.FLOOR)) // Jumping
         {
-            velocity.y = -jumpHeight;
+            if (velocity.x == 320 || velocity.x == -320)
+            {
+                velocity.y = -maxJumpHeight;
+            }
+            else
+            {
+                velocity.y = -minJumpHeight;
+            }
         }
         if (FlxG.keys.anyJustReleased([SPACE, UP, W]) && velocity.y < 0) // Variable Jump Height Stuff
         {

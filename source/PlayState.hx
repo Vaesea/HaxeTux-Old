@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxState;
+import flixel.addons.display.FlxBackdrop;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
@@ -9,6 +10,7 @@ import flixel.tile.FlxTilemap;
 class PlayState extends FlxState
 {
 	// You probably shouldn't change these if you're modding.
+	var background:FlxBackdrop;
 	var tux:Tux;
 	var map:FlxOgmo3Loader;
 	var levelBounds:FlxGroup; // temporary
@@ -22,6 +24,10 @@ class PlayState extends FlxState
 	override public function create()
 	{
 		super.create();
+
+		background = new FlxBackdrop('assets/images/backgrounds/arctis.png', X); // Change this if you want to change the background.
+		background.scrollFactor.x = 0.1;
+		background.scrollFactor.y = 0.1;
 
 		map = new FlxOgmo3Loader('assets/data/haxetux.ogmo', 'assets/data/levels/test.json');
 		Foreground = map.loadTilemap('assets/images/normalTiles.png', 'Foreground');
@@ -40,12 +46,15 @@ class PlayState extends FlxState
 		Interactive.setTileProperties(7, ANY); // Darkstone Middle
 		Interactive.setTileProperties(8, ANY); // Darkstone Right
 		Interactive.setTileProperties(9, ANY); // Darkstone Bottom
+
+		// Add Background
+		add(background);
 		
-		// Add Tiles
-		add(Foreground);
-		add(Interactive);
-		add(Background);
+		// Add Tiles, further down on the list means it's visible on top of the others.
 		add(PoleTiles);
+		add(Background);
+		add(Interactive);
+		add(Foreground);
 
 		// Add Tux
 		tux = new Tux();
