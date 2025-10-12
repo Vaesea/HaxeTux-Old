@@ -6,3 +6,6 @@ Recreation of SuperTux 0.0.6 using HaxeFlixel. If the license is wrong, please l
 * Everyone who worked on SuperTux 0.0.0 to 0.0.6 - All the assets from SuperTux 0.0.6 that were used for this recreation.
 * Lukas Nystrand (Mortimer Twang) - Mortimer's Chipdisko
 * Larry Ewing - Creator of Tux
+
+## More Info
+I don't know who made salcon.
