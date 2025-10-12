@@ -21,15 +21,21 @@ class PlayState extends FlxState
 	var Background:FlxTilemap;
 	var PoleTiles:FlxTilemap;
 
-	override public function create()
+	override public function create() // im so tired i cant do this properly today
+	{
+		super.create();
+		createLevel(null, null);
+	}
+
+	function createLevel(levelBackground:String, levelJson:String)
 	{
 		super.create();
 
-		background = new FlxBackdrop('assets/images/backgrounds/arctis.png', X); // Change this if you want to change the background.
+		background = new FlxBackdrop(levelBackground, X); // Change this if you want to change the background.
 		background.scrollFactor.x = 0.1;
 		background.scrollFactor.y = 0.1;
 
-		map = new FlxOgmo3Loader('assets/data/haxetux.ogmo', 'assets/data/levels/test.json');
+		map = new FlxOgmo3Loader('assets/data/haxetux.ogmo', levelJson);
 		Foreground = map.loadTilemap('assets/images/normalTiles.png', 'Foreground');
 		Interactive = map.loadTilemap('assets/images/normalTiles.png', 'Interactive');
 		Background = map.loadTilemap('assets/images/normalTiles.png', 'Background');
@@ -37,7 +43,6 @@ class PlayState extends FlxState
 		Interactive.follow();
 
 		// Only touch if you've added new tiles.
-		// TODO: Better way to do this? I did try not putting the collisionless tiles here.
 		Interactive.setTileProperties(1, ANY); // Snow Left
 		Interactive.setTileProperties(2, ANY); // Snow Middle
 		Interactive.setTileProperties(3, ANY); // Snow Right
