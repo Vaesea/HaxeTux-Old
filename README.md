@@ -8,4 +8,4 @@ Recreation of SuperTux 0.0.6 using HaxeFlixel. If the license is wrong, please l
 * Larry Ewing - Creator of Tux
 
 ## More Info
-I don't know who made salcon.
+I don't know who made salcon, the credits in SuperTux 0.0.6 doesn't say who made it I think.
