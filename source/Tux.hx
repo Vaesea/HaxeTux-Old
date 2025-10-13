@@ -9,11 +9,23 @@ package;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.util.FlxColor;
 import flixel.util.FlxDirectionFlags;
+
+enum States
+{
+    Small;
+    Big;
+    Fire;
+}
 
 class Tux extends FlxSprite
 {
+    // Current State
+    var currentState = States.Small;
+
+    // Whether Tux can take damage or not
+    var canTakeDamage = true;
+
     // Speed
     var walkSpeed = 230;
     var speed = 0; // DON'T CHANGE THIS UNLESS YOU KNOW WHAT YOU'RE DOING. You should only change walkSpeed and runSpeed.
@@ -86,6 +98,7 @@ class Tux extends FlxSprite
         }
         if (FlxG.keys.anyPressed([SPACE, UP, W]) && isTouching(FlxDirectionFlags.FLOOR)) // Jumping
         {
+            FlxG.sound.play("assets/sounds/jump.wav");
             if (velocity.x == 320 || velocity.x == -320)
             {
                 velocity.y = -maxJumpHeight;
@@ -93,6 +106,15 @@ class Tux extends FlxSprite
             else
             {
                 velocity.y = -minJumpHeight;
+            }
+
+            if (currentState == States.Small) // Play small Tux jump sound
+            {
+                FlxG.sound.play('assets/sounds/jump.wav');
+            }
+            else if (currentState == States.Big || currentState == States.Fire) // Play big Tux jump sound (It seems to be the exact same?)
+            {
+                FlxG.sound.play('assets/sounds/bigjump.wav');
             }
         }
         if (FlxG.keys.anyJustReleased([SPACE, UP, W]) && velocity.y < 0) // Variable Jump Height Stuff
