@@ -5,7 +5,12 @@ import flixel.FlxState;
 import flixel.addons.display.FlxBackdrop;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup;
+import flixel.text.FlxText;
 import flixel.tile.FlxTilemap;
+import flixel.util.FlxCollision;
+import flixel.util.FlxColor;
+
+// TODO: Add a way for the player to NOT fall off the edge of the level.
 
 class PlayState extends FlxState
 {
@@ -21,16 +26,25 @@ class PlayState extends FlxState
 	var Background:FlxTilemap;
 	var PoleTiles:FlxTilemap;
 
+	var levelNameText:FlxText;
+
 	override public function create() // im so tired i cant do this properly today
 	{
 		super.create();
-		createLevel(null, null, null);
+		createLevel(null, null, null, null);
 	}
 
-	function createLevel(levelBackground:String, levelJson:String, song:String)
+	function createLevel(levelBackground:String, levelJson:String, song:String, levelName:String)
 	{
 		super.create();
-
+		
+		// used a watermark thing i found in my cancelled fnf psych fork
+		// Level Name text.
+		levelNameText = new FlxText(0, 0, 640, levelName, 14);
+		levelNameText.setFormat(null, 14, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		levelNameText.scrollFactor.set();
+		levelNameText.borderSize = 1.25;
+		
 		background = new FlxBackdrop(levelBackground, X); // Change this if you want to change the background.
 		background.scrollFactor.x = 0.1;
 		background.scrollFactor.y = 0.1;
@@ -71,6 +85,8 @@ class PlayState extends FlxState
 	
 		// Play music
 		FlxG.sound.playMusic(song);
+
+		add(levelNameText);
 	}
 
 	override public function update(elapsed:Float)
