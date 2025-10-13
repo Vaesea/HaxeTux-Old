@@ -1,6 +1,14 @@
 # HaxeTux
 Recreation of SuperTux 0.0.6 using HaxeFlixel. If the license is wrong, please let me know! (I don't know whether I'm supposed to use GPL V2 or GPL V3 for this)
 
+## Things that won't be recreated here
+* Lives
+* Saving
+* All the text and stuff on screen (Although there will still be something to count the coins you have or whatever it is)
+* Score?
+* The exact same brick breaking effect of the original SuperTux 0.0.6
+* Main Menu (There'll just be a basic main menu with options to view the credits and play the game)
+
 ## Credits
 * Vaesea - The recreation
 * Everyone who worked on SuperTux 0.0.0 to 0.0.6 - All the assets from SuperTux 0.0.6 that were used for this recreation.
