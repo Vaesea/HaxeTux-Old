@@ -24,10 +24,10 @@ class PlayState extends FlxState
 	override public function create() // im so tired i cant do this properly today
 	{
 		super.create();
-		createLevel(null, null);
+		createLevel(null, null, null);
 	}
 
-	function createLevel(levelBackground:String, levelJson:String)
+	function createLevel(levelBackground:String, levelJson:String, song:String)
 	{
 		super.create();
 
@@ -68,6 +68,9 @@ class PlayState extends FlxState
 
 		// Make camera follow Tux
 		FlxG.camera.follow(tux, PLATFORMER, 1);
+	
+		// Play music
+		FlxG.sound.playMusic(song);
 	}
 
 	override public function update(elapsed:Float)

@@ -6,8 +6,8 @@ import PlayState; // Playstate loads levels. Again, if you know how to do this s
 
 class LevelTest extends PlayState
 {
-    override public function createLevel(levelBackground:String, levelJson:String)
+    override public function createLevel(levelBackground:String, levelJson:String, song:String)
     {
-        super.createLevel('assets/images/backgrounds/arctis.png', 'assets/data/levels/test.json');
+        super.createLevel('assets/images/backgrounds/arctis.png', 'assets/data/levels/test.json', 'assets/music/antarctica/mortimers_chipdisko.ogg');
     }
 }
