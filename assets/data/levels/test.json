@@ -20,7 +20,20 @@
         {"name": "bsod-right", "id": 2, "_eid": "21070071", "x": 224, "y": 224, "originX": 0, "originY": 0},
         {"name": "bsod-left", "id": 3, "_eid": "21064249", "x": 1728, "y": 384, "originX": 0, "originY": 0},
         {"name": "bsod-left", "id": 4, "_eid": "21064249", "x": 1536, "y": 384, "originX": 0, "originY": 0},
-        {"name": "bsod-left", "id": 5, "_eid": "21064249", "x": 2272, "y": 384, "originX": 0, "originY": 0}
+        {"name": "bsod-left", "id": 5, "_eid": "21064249", "x": 2272, "y": 384, "originX": 0, "originY": 0},
+        {"name": "distro", "id": 6, "_eid": "46137503", "x": 224, "y": 352, "originX": 0, "originY": 0},
+        {"name": "distro", "id": 7, "_eid": "46137503", "x": 256, "y": 352, "originX": 0, "originY": 0},
+        {"name": "distro", "id": 8, "_eid": "46137503", "x": 288, "y": 352, "originX": 0, "originY": 0},
+        {"name": "distro", "id": 9, "_eid": "46137503", "x": 320, "y": 352, "originX": 0, "originY": 0},
+        {"name": "distro", "id": 10, "_eid": "46137503", "x": 352, "y": 352, "originX": 0, "originY": 0},
+        {"name": "distro", "id": 11, "_eid": "46137503", "x": 832, "y": 192, "originX": 0, "originY": 0},
+        {"name": "distro", "id": 12, "_eid": "46137503", "x": 864, "y": 160, "originX": 0, "originY": 0},
+        {"name": "distro", "id": 13, "_eid": "46137503", "x": 928, "y": 192, "originX": 0, "originY": 0},
+        {"name": "distro", "id": 14, "_eid": "46137503", "x": 896, "y": 160, "originX": 0, "originY": 0},
+        {"name": "distro", "id": 15, "_eid": "46137503", "x": 1792, "y": 288, "originX": 0, "originY": 0},
+        {"name": "distro", "id": 16, "_eid": "46137503", "x": 1824, "y": 256, "originX": 0, "originY": 0},
+        {"name": "distro", "id": 17, "_eid": "46137503", "x": 1888, "y": 288, "originX": 0, "originY": 0},
+        {"name": "distro", "id": 18, "_eid": "46137503", "x": 1856, "y": 256, "originX": 0, "originY": 0}
       ]
     },
     {

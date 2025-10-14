@@ -10,20 +10,23 @@ import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.tile.FlxTilemap;
 import flixel.util.FlxColor;
+import objects.Distro;
 
 // TODO: Add a way for the player to NOT fall off the edge of the level.
+// Also, sorry that there are comments that try to seem funny. It's actually just me going crazy.
 
 class PlayState extends FlxState
 {
 	// You probably shouldn't change these if you're modding.
 	var background:FlxBackdrop;
+	var distros:FlxTypedGroup<Distro>;
 	var bsods:FlxTypedGroup<BSOD>;
 	var rightbsods:FlxTypedGroup<RightBSOD>;
+	var distro:Distro;
 	var tux:Tux;
 	var bsod:BSOD;
 	var bsodRight:RightBSOD;
 	var map:FlxOgmo3Loader;
-	var levelBounds:FlxGroup; // temporary
 
 	// Changing these is alright if you wanna do something like removing a layer or adding a layer.
 	var Foreground:FlxTilemap;
@@ -33,8 +36,7 @@ class PlayState extends FlxState
 
 	// GUI
 	var levelNameText:FlxText;
-	var coinText:FlxText;
-	public var totalCoins = 0;
+	var distroText:FlxText;
 
 	override public function create() // im so tired i cant do this properly today
 	{
@@ -45,6 +47,11 @@ class PlayState extends FlxState
 	function createLevel(levelBackground:String, levelJson:String, song:String, levelName:String)
 	{
 		super.create();
+
+		// so apparently i had to move the "something = new something();" up to fix a really annoying bug. why is haxeflixel like this?
+		tux = new Tux();
+		bsods = new FlxTypedGroup<BSOD>();
+		rightbsods = new FlxTypedGroup<RightBSOD>();
 		
 		// used a watermark thing i found in my cancelled fnf psych fork for both of these UI things
 		// Level Name text
@@ -53,11 +60,11 @@ class PlayState extends FlxState
 		levelNameText.scrollFactor.set();
 		levelNameText.borderSize = 1.25;
 
-		// Coin text
-		coinText = new FlxText(5, 4, 0, "Coins: " + totalCoins, 14); // did it like this because haxeflixel.
-		coinText.setFormat(null, 14, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		coinText.scrollFactor.set();
-		coinText.borderSize = 1.25;
+		// Distro text.
+		distroText = new FlxText(5, 4, 0, "Distros: " + tux.totalDistros, 14);
+		distroText.setFormat(null, 14, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		distroText.scrollFactor.set();
+		distroText.borderSize = 1.25;
 		
 		background = new FlxBackdrop(levelBackground, X); // Change this if you want to change the background.
 		background.scrollFactor.x = 0.1;
@@ -89,14 +96,15 @@ class PlayState extends FlxState
 		add(Interactive);
 		add(Foreground);
 
+		// Add distros
+		distros = new FlxTypedGroup<Distro>();
+		add(distros);
+
 		// Add Tux
-		tux = new Tux();
 		add(tux);
 
-		// Add the stupid groups or something idk
-		bsods = new FlxTypedGroup<BSOD>();
+		// Add the BSODs
 		add(bsods);
-		rightbsods = new FlxTypedGroup<RightBSOD>();
 		add(rightbsods);
 
 		map.loadEntities(placeEntities, "entities");
@@ -109,7 +117,7 @@ class PlayState extends FlxState
 
 		// Add GUI
 		add(levelNameText);
-		add(coinText);
+		add(distroText);
 	}
 
 	override public function update(elapsed:Float)
@@ -124,6 +132,9 @@ class PlayState extends FlxState
 		FlxG.collide(rightbsods, Interactive);
 		FlxG.overlap(bsods, tux, collideEnemies);
 		FlxG.overlap(rightbsods, tux, collideEnemiesTwo);
+		
+		// Distros
+		FlxG.overlap(distros, tux, collideDistros); // thank haxeflixel god i dont have to put 2 of these!
 
 		super.update(elapsed);
 	}
@@ -136,6 +147,16 @@ class PlayState extends FlxState
 	function collideEnemiesTwo(rightbsod:RightBSOD, tux:Tux)
 	{
 		rightbsod.interact(tux);
+	}
+
+	function collideDistros(distro:Distro, tux:Tux)
+	{
+		if (distro.alive) // If the distro is alive, Tux collects it and it increases the total distros.
+		{
+			distro.collect(tux);
+			tux.totalDistros += 1;
+			distroText.text = "Distros: " + tux.totalDistros;
+		}
 	}
 
 	function placeEntities(entity:EntityData)
@@ -151,6 +172,8 @@ class PlayState extends FlxState
 				bsods.add(new BSOD(x, y));
 			case "bsod-right":
 				rightbsods.add(new RightBSOD(x, y));
+			case "distro":
+				distros.add(new Distro(x, y));
 		}
 	}
 }

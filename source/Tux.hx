@@ -37,6 +37,9 @@ class Tux extends FlxSprite
     var gravity = 1000; // Gravity, I don't recommend changing this but you can if you want low gravity or high gravity.
     var decelerateOnJumpRelease = 0.5; // thanks godot tutorial that i used. also dont change this
 
+    // Coin Stuff
+	public var totalDistros = 0;
+
     // Image, if replaced, make sure the replacement image has the same animations!
     var tuxImage = FlxAtlasFrames.fromSparrow("assets/images/characters/tux/smalltux.png", "assets/images/characters/tux/smalltux.xml");
 
