@@ -1,5 +1,7 @@
 package;
 
+import enemies.BSOD;
+import enemies.RightBSOD;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.addons.display.FlxBackdrop;
@@ -7,7 +9,6 @@ import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.tile.FlxTilemap;
-import flixel.util.FlxCollision;
 import flixel.util.FlxColor;
 
 // TODO: Add a way for the player to NOT fall off the edge of the level.
@@ -16,7 +17,11 @@ class PlayState extends FlxState
 {
 	// You probably shouldn't change these if you're modding.
 	var background:FlxBackdrop;
+	var bsods:FlxTypedGroup<BSOD>;
+	var rightbsods:FlxTypedGroup<RightBSOD>;
 	var tux:Tux;
+	var bsod:BSOD;
+	var bsodRight:RightBSOD;
 	var map:FlxOgmo3Loader;
 	var levelBounds:FlxGroup; // temporary
 
@@ -77,8 +82,15 @@ class PlayState extends FlxState
 
 		// Add Tux
 		tux = new Tux();
-		map.loadEntities(placeEntities, "entities");
 		add(tux);
+
+		// Add the stupid groups or something idk
+		bsods = new FlxTypedGroup<BSOD>();
+		add(bsods);
+		rightbsods = new FlxTypedGroup<RightBSOD>();
+		add(rightbsods);
+
+		map.loadEntities(placeEntities, "entities");
 
 		// Make camera follow Tux
 		FlxG.camera.follow(tux, PLATFORMER, 1);
@@ -91,15 +103,43 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float)
 	{
+		// If there's any better way to do this, please let me know.
+
+		// Tux
 		FlxG.collide(tux, Interactive);
+		
+		// BSOD
+		FlxG.collide(bsods, Interactive);
+		FlxG.collide(rightbsods, Interactive);
+		FlxG.overlap(bsods, tux, collideEnemies);
+		FlxG.overlap(rightbsods, tux, collideEnemiesTwo);
+
 		super.update(elapsed);
+	}
+
+	function collideEnemies(bsod:BSOD, tux:Tux)
+	{
+		bsod.interact(tux);
+	}
+
+	function collideEnemiesTwo(rightbsod:RightBSOD, tux:Tux)
+	{
+		rightbsod.interact(tux);
 	}
 
 	function placeEntities(entity:EntityData)
 	{
-		if (entity.name == "tux")
+		var x = entity.x;
+		var y = entity.y;
+
+		switch (entity.name)
 		{
-			tux.setPosition(entity.x, entity.y);
+			case "tux":
+				tux.setPosition(x, y);
+			case "bsod-left":
+				bsods.add(new BSOD(x, y));
+			case "bsod-right":
+				rightbsods.add(new RightBSOD(x, y));
 		}
 	}
 }

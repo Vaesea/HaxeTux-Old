@@ -50,8 +50,8 @@ class Tux extends FlxSprite
 
         // XML Spritesheet stuff, thanks Friday Night Funkin'
         frames = tuxImage;
-        animation.addByPrefix('stand', 'stand', 10, false);
-        animation.addByPrefix('walk', 'walk', 10, true);
+        animation.addByPrefix('stand', 'stand', 12, false);
+        animation.addByPrefix('walk', 'walk', 12, true);
         animation.play('stand');
     }
 
@@ -98,7 +98,6 @@ class Tux extends FlxSprite
         }
         if (FlxG.keys.anyPressed([SPACE, UP, W]) && isTouching(FlxDirectionFlags.FLOOR)) // Jumping
         {
-            FlxG.sound.play("assets/sounds/jump.wav");
             if (velocity.x == 320 || velocity.x == -320)
             {
                 velocity.y = -maxJumpHeight;
@@ -114,7 +113,7 @@ class Tux extends FlxSprite
             }
             else if (currentState == States.Big || currentState == States.Fire) // Play big Tux jump sound (It seems to be the exact same?)
             {
-                FlxG.sound.play('assets/sounds/bigjump.wav');
+                FlxG.sound.play('assets/sounds/bigjump.wav', 0.5);
             }
         }
         if (FlxG.keys.anyJustReleased([SPACE, UP, W]) && velocity.y < 0) // Variable Jump Height Stuff
@@ -124,4 +123,28 @@ class Tux extends FlxSprite
 
 		super.update(elapsed); // Put this after the movement code, should probably also be after everything else in update.
 	}
+
+    public function take_damage()
+    {
+        if (canTakeDamage == true)
+        {
+            if (currentState == States.Fire)
+            {
+                currentState = States.Big;
+            }
+            else if (currentState == States.Big)
+            {
+                currentState = States.Small;
+            }
+            else if (currentState == States.Small)
+            {
+                die();
+            }
+        }
+    }
+    
+    public function die()
+    {
+        FlxG.resetState();
+    }
 }

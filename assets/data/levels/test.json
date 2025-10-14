@@ -15,7 +15,12 @@
       "gridCellsX": 114,
       "gridCellsY": 15,
       "entities": [
-        {"name": "tux", "id": 0, "_eid": "78985953", "x": 64, "y": 320, "originX": 0, "originY": 0}
+        {"name": "tux", "id": 0, "_eid": "78985953", "x": 64, "y": 320, "originX": 0, "originY": 0},
+        {"name": "bsod-left", "id": 1, "_eid": "21064249", "x": 768, "y": 288, "originX": 0, "originY": 0},
+        {"name": "bsod-right", "id": 2, "_eid": "21070071", "x": 224, "y": 224, "originX": 0, "originY": 0},
+        {"name": "bsod-left", "id": 3, "_eid": "21064249", "x": 1728, "y": 384, "originX": 0, "originY": 0},
+        {"name": "bsod-left", "id": 4, "_eid": "21064249", "x": 1536, "y": 384, "originX": 0, "originY": 0},
+        {"name": "bsod-left", "id": 5, "_eid": "21064249", "x": 2272, "y": 384, "originX": 0, "originY": 0}
       ]
     },
     {
