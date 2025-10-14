@@ -13,7 +13,6 @@ class Main extends Sprite
 	{
 		super();
 		addChild(new FlxGame(0, 0, LevelTest));
-		addChild(new FPS(3, 3, FlxColor.WHITE)); // taken from fnf but x and y positions are changed
 		FlxG.autoPause = false;
 	}
 }

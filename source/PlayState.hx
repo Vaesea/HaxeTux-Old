@@ -31,7 +31,10 @@ class PlayState extends FlxState
 	var Background:FlxTilemap;
 	var PoleTiles:FlxTilemap;
 
+	// GUI
 	var levelNameText:FlxText;
+	var coinText:FlxText;
+	public var totalCoins = 0;
 
 	override public function create() // im so tired i cant do this properly today
 	{
@@ -43,12 +46,18 @@ class PlayState extends FlxState
 	{
 		super.create();
 		
-		// used a watermark thing i found in my cancelled fnf psych fork
-		// Level Name text.
-		levelNameText = new FlxText(0, 0, 640, levelName, 14);
+		// used a watermark thing i found in my cancelled fnf psych fork for both of these UI things
+		// Level Name text
+		levelNameText = new FlxText(0, 4, 640, levelName, 14);
 		levelNameText.setFormat(null, 14, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		levelNameText.scrollFactor.set();
 		levelNameText.borderSize = 1.25;
+
+		// Coin text
+		coinText = new FlxText(5, 4, 0, "Coins: " + totalCoins, 14); // did it like this because haxeflixel.
+		coinText.setFormat(null, 14, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		coinText.scrollFactor.set();
+		coinText.borderSize = 1.25;
 		
 		background = new FlxBackdrop(levelBackground, X); // Change this if you want to change the background.
 		background.scrollFactor.x = 0.1;
@@ -98,7 +107,9 @@ class PlayState extends FlxState
 		// Play music
 		FlxG.sound.playMusic(song);
 
+		// Add GUI
 		add(levelNameText);
+		add(coinText);
 	}
 
 	override public function update(elapsed:Float)

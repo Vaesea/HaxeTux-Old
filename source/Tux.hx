@@ -32,8 +32,8 @@ class Tux extends FlxSprite
     var runSpeed = 320;
 
     // Jump stuff and Gravity
-    var minJumpHeight = 512; // Jump Height (Minimum)
-    var maxJumpHeight = 544; // Jump Height (Maximum)
+    public var minJumpHeight = 512; // Jump Height (Minimum)
+    public var maxJumpHeight = 544; // Jump Height (Maximum)
     var gravity = 1000; // Gravity, I don't recommend changing this but you can if you want low gravity or high gravity.
     var decelerateOnJumpRelease = 0.5; // thanks godot tutorial that i used. also dont change this
 

@@ -3,6 +3,7 @@ package enemies;
 // Tutorials Used:
 // Discover HaxeFlixel (It's a book)
 
+import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
@@ -95,7 +96,14 @@ class RightBSOD extends FlxSprite
             alive = false;
             var timer = new haxe.Timer(2000);
             timer.run = function() { kill(); }
-            tux.velocity.y = -544; // the WORST way to add this. will NEED to be changed!!!
+            if (FlxG.keys.anyPressed([SPACE, UP, W]))
+            {
+                tux.velocity.y = -tux.maxJumpHeight;
+            }
+            else
+            {
+                tux.velocity.y = -tux.minJumpHeight / 2;
+            }
         }
         else
         {
