@@ -113,7 +113,7 @@ class Tux extends FlxSprite
             }
             else if (currentState == States.Big || currentState == States.Fire) // Play big Tux jump sound (It seems to be the exact same?)
             {
-                FlxG.sound.play('assets/sounds/bigjump.wav', 0.5);
+                FlxG.sound.play('assets/sounds/bigjump.wav');
             }
         }
         if (FlxG.keys.anyJustReleased([SPACE, UP, W]) && velocity.y < 0) // Variable Jump Height Stuff
