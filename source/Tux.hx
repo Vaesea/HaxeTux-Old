@@ -124,26 +124,26 @@ class Tux extends FlxSprite
 		super.update(elapsed); // Put this after the movement code, should probably also be after everything else in update.
 	}
 
-    public function take_damage()
+    public function take_damage() //  Makes Tux take damage.
     {
         if (canTakeDamage == true)
         {
-            if (currentState == States.Fire)
+            if (currentState == States.Fire) // If current state is fire, make him go down to just being big.
             {
                 currentState = States.Big;
             }
-            else if (currentState == States.Big)
+            else if (currentState == States.Big) // If current state is big, make him go down to just being small.
             {
                 currentState = States.Small;
             }
-            else if (currentState == States.Small)
+            else if (currentState == States.Small) // If current state is small, kill him.
             {
                 die();
             }
         }
     }
     
-    public function die()
+    public function die() // Tux dies. This will be changed to not just do this.
     {
         FlxG.resetState();
     }
