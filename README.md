@@ -1,5 +1,7 @@
-# HaxeTux
-Recreation of SuperTux 0.0.6 using HaxeFlixel. If the license is wrong, please let me know! (I don't know whether I'm supposed to use GPL V2 or GPL V3 for this)
+# HaxeTux Old
+Old version of a recreation of SuperTux 0.0.6 using HaxeFlixel. If the license is wrong, please let me know! (I don't know whether I'm supposed to use GPL V2 or GPL V3 for this)
+
+If you want to see the new one, there should be a HaxeTux-New repository soon with stuff in it coming later. The reason why I've decided to do this is because the code is getting too "overwhelming" (it's terrible, ESPECIALLY playstate.hx) and i can't seem to finish making a power-up thing because I'm kind of dumb.
 
 ## Things that won't be recreated here
 * Lives
@@ -23,6 +25,7 @@ I don't know who made salcon, the credits in SuperTux 0.0.6 doesn't say who made
 * Make sure you have the latest version of HaxeFlixel and Flixel-Addons installed.
 * Make sure you have the latest version of Lime installed.
 * I think you also need the latest version of hxcpp? I'm not sure.
+* I also think you need the latest version of openfl? I'm not sure.
 * Go to the folder where the game's Project.xml is in a terminal and type "lime test windows -debug" if you're on Windows, "lime test mac -debug" if you're on Mac or "lime test linux -debug" if you're on Linux.
 
 ## Why does this exist?
