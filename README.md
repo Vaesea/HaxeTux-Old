@@ -1,7 +1,7 @@
 # HaxeTux Old
 Old version of a recreation of SuperTux 0.0.6 using HaxeFlixel. If the license is wrong, please let me know! (I don't know whether I'm supposed to use GPL V2 or GPL V3 for this)
 
-If you want to see the new one, there should be a HaxeTux-New repository soon with stuff in it coming later. The reason why I've decided to do this is because the code is getting too "overwhelming" (it's terrible, ESPECIALLY playstate.hx) and i can't seem to finish making a power-up thing because I'm kind of dumb.
+If you want to see the new one, there should be a HaxeTux-New repository soon with stuff in it coming later. The reason why I've decided to do this is because the code is getting too "overwhelming" (it's terrible, ESPECIALLY playstate.hx) and I can't seem to finish making a power-up thing because I'm kind of dumb.
 
 ## Things that won't be recreated here
 * Lives
